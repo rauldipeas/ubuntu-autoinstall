@@ -1,0 +1,44 @@
+#cloud-config
+autoinstall:
+    version: 1
+    refresh-installer:
+        update: true
+        channel: latest/stable
+    source:
+        id: ubuntu-desktop-minimal
+    interactive-sections:
+    - network
+    identity:
+        realname: 'Raul Dipeas'
+        hostname: Ubuntu
+        username: rauldipeas
+        password: '$y$j9T$uhkxlm8nUQaNu.6rl4k2d.$DIldpYy96OHg8lFjfXfc671BZcGWkPOmaDONGAhGSg3'
+    locale: pt_BR.utf8
+    keyboard:
+        layout: br
+    timezone: "America/Sao_Paulo"
+    ssh:
+        install-server: true
+        allow-pw: true
+    error-commands:
+        - tar -czf /installer-logs.tar.gz /var/log/installer/
+        - journalctl -b > /installer-journal.log
+    debconf-selections: |
+        jackd2 jackd/tweak_rt_limits string true
+    packages:
+        - cadence
+    codecs:
+        install: true
+    drivers:
+        install: true
+    late-commands:
+        - curtin in-target -- apt autoremove --purge -y meterbrige
+        - curtin in-target -- echo 'vm.swappiness = 10'|tee -a /etc/sysctl.d/swappiness.conf>/dev/null
+        - curtin in-target -- echo 'GRUB_CMDLINE_LINUX_DEFAULT="cpufreq.default_governor=performance mitigations=off preempt=full quiet splash threadirqs vt.global_cursor_default=0 zswap.enabled=1 zswap.compressor=lz4 zswap.max_pool_percent=20 zswap.zpool=z3fold"'|tee /etc/default/grub.d/rtcqs.cfg>/dev/null
+        - curtin in-target -- echo 'lz4'|tee -a /etc/initramfs-tools/modules>/dev/null
+        - curtin in-target -- echo 'lz4_compress'|tee -a /etc/initramfs-tools/modules>/dev/null
+        - curtin in-target -- echo 'z3fold'|tee -a /etc/initramfs-tools/modules>/dev/null
+        - curtin in-target -- update-initramfs -u -k all
+        - curtin in-target -- wget -qO- https://github.com/Ardour/ardour/raw/master/tools/udev/99-cpu-dma-latency.rules|tee /etc/udev/rules.d/99-cpu-dma-latency.rules>/dev/null
+    updates: all
+    shutdown: reboot
