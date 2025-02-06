@@ -26,7 +26,10 @@ autoinstall:
     debconf-selections: |
         jackd2 jackd/tweak_rt_limits string true
     packages:
-        - cadence
+        - ardour
+        - gimp
+        - helvum
+        - kdenlive
     codecs:
         install: true
     drivers:
