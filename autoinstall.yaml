@@ -7,7 +7,9 @@ autoinstall:
     source:
         id: ubuntu-desktop-minimal
     interactive-sections:
-    - network
+        - keyboard
+        - network
+        - partitioning
     identity:
         realname: 'Raul Dipeas'
         hostname: Ubuntu
