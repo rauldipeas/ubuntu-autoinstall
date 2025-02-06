@@ -5,10 +5,10 @@ autoinstall:
         channel: latest/stable
     source:
         id: ubuntu-desktop-minimal
-    interactive-sections:
-        - keyboard
-        - network
-        - disk
+    storage:
+        config:
+        - type: disk
+            id: disk0
     identity:
         realname: 'Raul Dipeas'
         hostname: Ubuntu
