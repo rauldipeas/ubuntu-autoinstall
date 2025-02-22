@@ -25,6 +25,5 @@ autoinstall:
         - curtin in-target -- wget -qO /etc/initramfs-tools/modules https://github.com/rauldipeas/ubuntu-autoinstall/raw/main/modules
         - curtin in-target -- update-initramfs -u -k all
         - curtin in-target -- wget -qO /etc/udev/rules.d/99-cpu-dma-latency.rules https://github.com/Ardour/ardour/raw/master/tools/udev/99-cpu-dma-latency.rules
-        - curtin in-target -- flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
     updates: all
     shutdown: reboot
