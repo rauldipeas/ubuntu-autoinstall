@@ -19,7 +19,6 @@ autoinstall:
     drivers:
         install: true
     late-commands:
-        - curtin in-target -- usermod -aG audio $(ls /home)
         - curtin in-target -- wget -qO /etc/sysctl.d/swappiness.conf https://github.com/rauldipeas/ubuntu-autoinstall/raw/main/swappiness.conf
         - curtin in-target -- wget -qO /etc/default/grub.d/rtcqs.cfg https://github.com/rauldipeas/ubuntu-autoinstall/raw/main/rtcqs.cfg
         - curtin in-target -- update-grub
