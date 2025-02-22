@@ -14,7 +14,6 @@ autoinstall:
         - papirus-icon-theme
         - pipewire-jack
         - pipx
-        - pulseaudio-module-jack
     codecs:
         install: true
     drivers:
