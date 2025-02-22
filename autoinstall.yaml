@@ -11,13 +11,12 @@ autoinstall:
     packages:
         - bibata-cursor-theme
         - dropbear
-        - gimp
+        - gnome-software-plugin-flatpak
         - gnome-tweaks
-        - helvum
         - jackd
-        - kdenlive
         - orchis-gtk-theme
         - papirus-icon-theme
+        - pipewire-jack
         - pipx
         - pulseaudio-module-jack
     codecs:
@@ -32,5 +31,11 @@ autoinstall:
         - curtin in-target -- wget -qO /etc/initramfs-tools/modules https://github.com/rauldipeas/ubuntu-autoinstall/raw/main/modules
         - curtin in-target -- update-initramfs -u -k all
         - curtin in-target -- wget -qO /etc/udev/rules.d/99-cpu-dma-latency.rules https://github.com/Ardour/ardour/raw/master/tools/udev/99-cpu-dma-latency.rules
+        - curtin in-target -- flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+        - curtin in-target -- flatpak install -y com.github.tchx84.Flatseal
+        - curtin in-target -- flatpak install -y fm.reaper.Reaper
+        - curtin in-target -- flatpak install -y org.gimp.GIMP
+        - curtin in-target -- flatpak install -y org.kde.kdenlive
+        - curtin in-target -- flatpak install -y org.pipewire.Helvum
     updates: all
     shutdown: reboot
